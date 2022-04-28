@@ -1,31 +1,76 @@
 package com.company;
+import java.io.*;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Locale;
+import java.util.Set;
 
 public class OrderDetails {
-    String cardNumber;
     HashMap<String, Integer> orderDetails;
+    String filename;
+    Set<String> corrections;
+    double totalamount;
 
-    OrderDetails(){
-        cardNumber = null;
+    OrderDetails(String name) {
         orderDetails = new HashMap<String, Integer>();
+        filename = name;
+        Set<String> corrections = new HashSet<>();
+        totalamount = 0;
     }
 
-    boolean addItem(String key, Integer value, Inventory inventory){
-        orderDetails.put(key, value);
-        if(inventory.checkCapacity(key, value) && inventory.checkAvailability(key,value)){
-            return true;
+    Set<String> calculateTotalPrice(Inventory inventoryItems) throws IOException{
+        BufferedReader csvReader = new BufferedReader(new FileReader(filename));
+        String row;
+        int count = 0;
+        Essentials essentials = new Essentials();
+        Luxury luxury = new Luxury();
+        Miscellaneous miscellaneous = new Miscellaneous();
+        essentials.setNextCategory(luxury);
+        luxury.setNextCategory(miscellaneous);
+        Set<String> essentialsSeen = new HashSet<>();
+        Set<String> luxurySeen = new HashSet<>();
+        Set<String> missSeen = new HashSet<>();
+        Set<String> corrections = new HashSet<>();
+
+        while ((row = csvReader.readLine()) != null) {
+            String[] data = row.split(",");
+            System.out.println("data: "+data[0]+data[1]);
+            if (count == 1) {
+                Billing.addCard(data[2]);
+            }
+            if (count > 0) {
+                orderDetails.put(data[0],Integer.parseInt(data[1]));
+                if(inventoryItems.itemilterator.getValue((data[0]).toLowerCase()).getItemCategory()== Category.NoCategory){
+                    corrections.add(data[0]);
+                }
+                else{
+                    double amount = essentials.calculatePrice(inventoryItems,data[0].toLowerCase(), Integer.parseInt(data[1]),corrections,essentialsSeen,luxurySeen,missSeen);
+                    totalamount+=amount;
+                }
+                if(CategoryLimit.getTotalEssential()<0){
+                    corrections.addAll(essentialsSeen);
+                }
+                if(CategoryLimit.getTotalLuxury()<0)
+                    corrections.addAll(luxurySeen);
+
+                if(CategoryLimit.getTotalMisc()<0)
+                    corrections.addAll(missSeen);
+            }
+            count += 1;
         }
-        else{
-            return false;
-        }
-
-    }
-    void updateCardNumber(String cardnumber){
-        cardNumber = cardnumber;
+        csvReader.close();
+        return corrections;
     }
 
-
-    void printDetails(){
-        System.out.println("Order Details: "+ orderDetails + "\nCard Number: "+ cardNumber);
-    }
+//    boolean addItem(String key, Integer value, Inventory inventory){
+//        orderDetails.put(key, value);
+//        Items item = inventory.itemilterator.getValue(key);
+//        if(inventory.checkCapacity(item, value) && inventory.checkAvailability(item, value)){
+//            return true;
+//        }
+//        else{
+//            return false;
+//        }
+//
+//    }
 }

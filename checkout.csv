@@ -1,8 +1,3 @@
-Item,Quantity,Price
-Wallet,2,100.0
-Shampoo,2,10.0
-
-Total: ,220.0
-
-Payment Details 
-Card,4.12E+12
+Item,Quantity,Price,TotalPrice
+Wallet,2,100.0,220.0
+Shampoo,2,10.0,
