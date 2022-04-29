@@ -1,0 +1,5 @@
+Please correct cart items: 
+Items, Quantity
+wallet,1
+pen,10
+chocolates,5
