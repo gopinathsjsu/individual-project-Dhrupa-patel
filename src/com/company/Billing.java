@@ -26,7 +26,7 @@ public class Billing {
                 generateCheckoutCSV(order1);
             }
             else{
-                generateCorrectedQuantityCSV(corrections);
+                generateCorrectedQuantityCSV(corrections, inventory);
             }
 
 //            try {
@@ -92,10 +92,17 @@ public class Billing {
         }
     }
 
-    public static void generateCorrectedQuantityCSV(Set<String> corrections){
+    public static void generateCorrectedQuantityCSV(Set<String> corrections, Inventory inventory){
         try {
             FileWriter myWriter = new FileWriter("CorrectedItems.txt");
-            myWriter.write("Please correct cart items: " + corrections);
+            StringBuilder sb = new StringBuilder();
+            String header = "Please correct cart items: " + "\n" + "Items, Quantity\n";
+            sb.append(header);
+            for(String item: corrections){
+                String data = item+","+inventory.itemilterator.getValue(item).getCount()+"\n";
+                sb.append(data);
+            }
+            myWriter.write(sb.toString());
             myWriter.close();
             System.out.println("Successfully wrote to the file.");
         }
