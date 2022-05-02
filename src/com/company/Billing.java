@@ -55,7 +55,7 @@ public class Billing {
     public static ArrayList<String> readCards(String filename) throws IOException{
         ArrayList<String> cards = new ArrayList<>();
         String row;
-        BufferedReader fileReader = new BufferedReader(new FileReader(filename));
+        BufferedReader fileReader = new BufferedReader(new FileReader("SampleData\\"+filename));
         while ((row = fileReader.readLine()) != null) {
             cards.add(row);
         }
@@ -71,19 +71,15 @@ public class Billing {
         try {
             PrintWriter writer = new PrintWriter(new File("checkout.csv"));
             StringBuilder sb = new StringBuilder();
-            int count = 0;
-            String header = "Item" + "," + "Quantity" + "," + "Price" + ","+ "TotalPrice"+ "\n";
+            String header = "Item" + "," + "Quantity" + "," + "Price"+ "\n";
             sb.append(header);
             for (Map.Entry order : order1.orderDetails.entrySet()) {
-                double price = inventory.itemilterator.getValue((String)order.getKey()).getPrice();
+                double price = inventory.itemilterator.getValue(((String) order.getKey()).toLowerCase()).getPrice();
                 String data = (String)order.getKey()+","+Integer.toString((int)order.getValue())+","+Double.toString(price)+",";
-                if (count==0){
-                    data+=order1.totalamount;
-                    count=1;
-                }
                 data+="\n";
                 sb.append(data);
             }
+            sb.append("\nTotalPrice: "+","+order1.totalamount+"\n");
             writer.write(sb.toString());
             writer.close();
         }

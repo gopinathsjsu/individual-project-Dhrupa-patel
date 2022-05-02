@@ -24,11 +24,12 @@ public class Inventory {
 
     void traverseList(String filename) throws IOException {
         try {
-            BufferedReader csvReader = new BufferedReader(new FileReader(filename));
+            BufferedReader csvReader = new BufferedReader(new FileReader("SampleData\\"+filename));
             String row;
             int count = 0;
             while ((row = csvReader.readLine()) != null) {
                 String[] data = row.split(",");
+                System.out.println("Inventory Data: "+data[0]+ ", "+data[1]+ ", "+data[2]+" , "+data[3]);
                 if (count > 0) {
                     itemilterator.addItemInventory(returnCategory(data[1]), data[0].toLowerCase(), Integer.parseInt(data[2]),Double.parseDouble(data[3]));
                 }
