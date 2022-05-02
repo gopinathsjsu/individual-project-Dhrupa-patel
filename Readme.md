@@ -1,10 +1,11 @@
-Chain of Responsibility:
-1. Capacity count for each type of item
-2. Quantity for each item is permissible
+<h2> Design Pattern(s) </h2>
 
+Chain of Responsibility:
+- Capacity count for each type of item
+- Quantity for each item is permissible
 
 Iterator:
-Provide a way to access the elements of an aggregate object sequentially without exposing its underlying representation.
+- Provide a way to access the elements of an aggregate object sequentially without exposing its underlying representation.
 
 <h2> Class Diagram </h2>
 
