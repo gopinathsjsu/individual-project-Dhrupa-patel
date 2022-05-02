@@ -1,6 +1,5 @@
 package com.company;
 
-import java.util.HashMap;
 import java.util.Set;
 
 public class Miscellaneous implements CategoryChain {

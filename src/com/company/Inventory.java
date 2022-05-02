@@ -1,9 +1,6 @@
 package com.company;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Locale;
 
 public class Inventory {
     ItemIlterator itemilterator;
@@ -38,7 +35,7 @@ public class Inventory {
         }
         catch (FileNotFoundException ex)
         {
-            // insert code to run when exception occurs
+            System.out.println("File Not Found! "+ex);
         }
     }
 
