@@ -19,7 +19,7 @@ public class OrderDetails {
     }
 
     Set<String> calculateTotalPrice(Inventory inventoryItems) throws IOException{
-        BufferedReader csvReader = new BufferedReader(new FileReader(filename));
+        BufferedReader csvReader = new BufferedReader(new FileReader("SampleData\\"+filename));
         String row;
         int count = 0;
         Essentials essentials = new Essentials();

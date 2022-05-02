@@ -1,3 +1,4 @@
-Item,Quantity,Price,TotalPrice
-Wallet,2,100.0,220.0
+Item,Quantity,Price
 Shampoo,2,10.0,
+chocolates,2,3.0,
+TotalPrice: ,26.0
