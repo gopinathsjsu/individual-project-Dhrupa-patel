@@ -16,35 +16,22 @@ public class Billing {
             inventory = new Inventory();
             inventory.traverseList("inventory.csv");
 
-            /* parsing Orders List to identify if order can be served or not */
+            /* Adding the existing credit cards from database */
             Cards = readCards("Cards.csv");
+            System.out.println("Cards: "+Cards);
 
+            /* getting the shopping cart details */
             OrderDetails order1 = new OrderDetails("order.csv");
             Set<String>corrections = order1.calculateTotalPrice(inventory);
+            System.out.println("After shopping cart traversed: "+Cards);
 
+            /* Checking if quantities and category selected suffice the condition set forth and generate necessary file*/
             if(corrections.size()==0){
                 generateCheckoutCSV(order1);
             }
             else{
                 generateCorrectedQuantityCSV(corrections, inventory);
             }
-
-//            try {
-//                if (invalid_items.size() == 0) {
-//                    Checkout checkout = new Checkout(inventory);
-//                    double total = checkout.getTotal(order1);
-//                    checkout.generateCSV(order1, total);
-//                } else {
-//                    FileWriter myWriter = new FileWriter("Checkout_Cart.txt");
-//                    myWriter.write("Please correct cart items: " + invalid_items);
-//                    myWriter.close();
-//                    System.out.println("Successfully wrote to the file.");
-//                }
-//            } catch (IOException e) {
-//                System.out.println("Cannot perform write operation! \n" + e);
-//            }
-//
-//            order1.printDetails();
         }
         catch (
                 FileNotFoundException ex) {
@@ -55,8 +42,13 @@ public class Billing {
     public static ArrayList<String> readCards(String filename) throws IOException{
         ArrayList<String> cards = new ArrayList<>();
         String row;
+        int count = 0;
         BufferedReader fileReader = new BufferedReader(new FileReader("SampleData\\"+filename));
         while ((row = fileReader.readLine()) != null) {
+            if (count==0){
+                count=1;
+                continue;
+            }
             cards.add(row);
         }
         return cards;
@@ -64,6 +56,11 @@ public class Billing {
     public static void addCard(String cardnumber) throws IOException{
         if(!Cards.contains(cardnumber)) {
             Cards.add(cardnumber);
+            FileWriter fw = new FileWriter("SampleData\\Cards.csv", true);
+            BufferedWriter bw = new BufferedWriter(fw);
+            bw.write(cardnumber);
+            bw.newLine();
+            bw.close();
         }
     }
 

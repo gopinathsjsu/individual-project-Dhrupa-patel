@@ -8,13 +8,11 @@ import java.util.Set;
 public class OrderDetails {
     HashMap<String, Integer> orderDetails;
     String filename;
-    Set<String> corrections;
     double totalamount;
 
     OrderDetails(String name) {
         orderDetails = new HashMap<String, Integer>();
         filename = name;
-        Set<String> corrections = new HashSet<>();
         totalamount = 0;
     }
 
@@ -34,7 +32,6 @@ public class OrderDetails {
 
         while ((row = csvReader.readLine()) != null) {
             String[] data = row.split(",");
-            System.out.println("data: "+data[0]+data[1]);
             if (count == 1) {
                 Billing.addCard(data[2]);
             }
@@ -62,15 +59,4 @@ public class OrderDetails {
         return corrections;
     }
 
-//    boolean addItem(String key, Integer value, Inventory inventory){
-//        orderDetails.put(key, value);
-//        Items item = inventory.itemilterator.getValue(key);
-//        if(inventory.checkCapacity(item, value) && inventory.checkAvailability(item, value)){
-//            return true;
-//        }
-//        else{
-//            return false;
-//        }
-//
-//    }
 }
