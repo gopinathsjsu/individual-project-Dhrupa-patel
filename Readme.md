@@ -1,4 +1,4 @@
-<h2> Design Pattern(s) </h2>
+ <h2> Design Pattern(s) </h2>
 
 Chain of Responsibility: As, for the given problem statement, based on category of item certain checks needs to be performed. Thus, chain of responsibility design pattern was employed to create a chain of responsibility based on Item's category. An item goes through provided chain till responsibility is not assigned to particular item i.e. category-based tasks are not performed. In this problem prices are calculated and items belonging to particular category is check for it's max quantity limit.
 
@@ -14,6 +14,17 @@ Iterator: In the given problem statement, an item holds specific characteristics
 
 Singleton: In the problem statement, we also had to put limit to each category, which will apply to all items belonging to particular category. Thus, singleton class “CategoryLimit” is created to ensure that limit is only set once and applied to all items belonging to particular category.
 
+<h2> Folder structure Details </h2>
+
+- SampleData folder have all the input data that needs to be feed to code like, inventory.csv, cards.csv (creditcard details), order.csv.
+- The processed output .txt or .csv file will generate outside of SampleData. In repository it has file named "CorrectedItems.txt", this file is when order cannot be processed and what items needed to be modified to fit criteria. The "checkout.csv" file is generated when order can be processed and contains Billing details.
+
+<h2> Run the Code </h2>
+
+- Clone the repository using HTTPs or SSH link.
+- add the order and inventory file you want to process in SampleData folder.
+- run the Billing.java file which can be found in src directory.
+- Necessary files would be generated.
 
 <h2> Class Diagram </h2>
 
