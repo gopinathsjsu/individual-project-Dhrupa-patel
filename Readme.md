@@ -22,8 +22,9 @@
 <h2> Steps Run the Code </h2>
 
 - Clone the repository using HTTPs or SSH link. Move to pom.xml and import all dependencies Download Java and set up path of JDK in Environment.
-- add the order and inventory file you want to process in SampleData folder.
-- run the Billing.java file which can be found in src directory.
+- Load the project using IntellJ Editor.
+- add the order and inventory file you want to process in SampleData folder in project directory
+- While running it first time you will have to edit Run/Debug configuration to run Billing.java file which can be found in src directory. Once configured run the Billing.java file.
 - Necessary files would be generated.
 
 <h2> Class Diagram </h2>
