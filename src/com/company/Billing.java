@@ -23,7 +23,6 @@ public class Billing {
             Scanner sc = new Scanner(System.in);
             System.out.println("Enter full file location of order: ");
             String filename = sc.nextLine();
-            filename += ".csv";
             /* getting the shopping cart details */
             OrderDetails order1 = new OrderDetails(filename);
             Set<String>corrections = order1.calculateTotalPrice(inventory);
