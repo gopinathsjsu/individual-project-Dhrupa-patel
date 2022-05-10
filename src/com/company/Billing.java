@@ -20,8 +20,11 @@ public class Billing {
             Cards = readCards("Cards.csv");
             System.out.println("Cards: "+Cards);
 
+            Scanner sc = new Scanner(System.in);
+            System.out.println("Enter full file location of order: ");
+            String filename = sc.nextLine();
             /* getting the shopping cart details */
-            OrderDetails order1 = new OrderDetails("order.csv");
+            OrderDetails order1 = new OrderDetails(filename);
             Set<String>corrections = order1.calculateTotalPrice(inventory);
             System.out.println("After shopping cart traversed: "+Cards);
 
@@ -70,6 +73,7 @@ public class Billing {
             StringBuilder sb = new StringBuilder();
             String header = "Item" + "," + "Quantity" + "," + "Price"+ "\n";
             sb.append(header);
+
             for (Map.Entry order : order1.orderDetails.entrySet()) {
                 double price = inventory.itemilterator.getValue(((String) order.getKey()).toLowerCase()).getPrice();
                 String data = (String)order.getKey()+","+Integer.toString((int)order.getValue())+","+Double.toString(price)+",";

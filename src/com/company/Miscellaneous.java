@@ -12,9 +12,9 @@ public class Miscellaneous implements CategoryChain {
     }
 
     @Override
-    public double calculatePrice(Inventory inventry , String item , int quantity, Set<String> error,
+    public double calculatePrice(Inventory inventory , String item , int quantity, Set<String> error,
                                  Set<String> essentialsSeen,Set<String> luxurySeen,Set<String> MissSeen)  {
-        Items items = inventry.itemilterator.getValue(item);
+        Items items = inventory.itemilterator.getValue(item);
         if(items.getItemCategory() == Category.Miscellaneous){
             MissSeen.add(item);
             if(quantity<=items.getCount()){
